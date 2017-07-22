@@ -1,7 +1,6 @@
-import {gql} from 'react-apollo'
+import { gql } from 'react-apollo'
 
 class AuthService {
-
     loginUser = gql`
         mutation($email: String!, $password: String!) {
             signinUser(email: {
@@ -12,6 +11,7 @@ class AuthService {
             }
         }
     `
+
     registerUser = gql`
         mutation($email: String!, $password: String!, $name: String!) {
             createUser(
@@ -29,6 +29,7 @@ class AuthService {
             }
         }
     `
+
     getLoggedInUser = gql`
         query {
             user {
@@ -41,4 +42,5 @@ class AuthService {
         }
     `
 }
+
 export default new AuthService()

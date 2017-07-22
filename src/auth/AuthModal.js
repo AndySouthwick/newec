@@ -26,7 +26,7 @@ class AuthModal extends React.Component {
                     <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
                     <ModalBody>
                         <div>
-                            text
+                           <Login/>
                         </div>
 
                     </ModalBody>

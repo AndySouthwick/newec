@@ -27,7 +27,7 @@ class Auth extends Component {
     render() {
 
         if(this.props.token === null) {
-            return <Redirect to="/login"/>
+            return <Redirect to="/store"/>
         }
         let userName = <span>Loading user profile</span>
         if (this.props.userInfo != null) {
@@ -40,7 +40,7 @@ class Auth extends Component {
                         <p>
                             You've been authenticated: {userName}
                         </p>
-                        <Button type="button" color="primary" onClick={this.handleLogout()}>Logout</Button>
+                        <Button type="button" color="primary" onClick={this.handleLogout}>Logout</Button>
                     </Col>
                 </Row>
             </Container>

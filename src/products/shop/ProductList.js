@@ -3,11 +3,33 @@ import React, {Component} from 'react'
 import { graphql } from 'react-apollo'
 import {fetchAllProducts} from '../service'
 import { Card, CardImg, CardText, CardBlock,
-    CardTitle, CardSubtitle, Button, Container, Col, Row } from 'reactstrap';
-import AuthModal from "../../auth/AuthModal";
+    CardTitle, CardSubtitle, Button, Container, Col, Row,  Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
+import Login from '../../auth/Login'
 class ProductList extends Component{
+
+    constructor (props) {
+        super(props)
+        this.state = {
+            isOpen: false
+        }
+    }
+
+
+    closeModal = () => {
+        this.setState({
+            isOpen: false
+        })
+    }
+
+
     render(){
+
+        let button  = <button  color="danger" onClick={(evt) => this.setState({ isOpen: true })}>sign in dude</button>
+        if (this.props.token !== null){
+            button = <Button color="success" >Buy Now</Button>
+        }
+
         let products = null
         if (this.props.data.allProducts) {
             products = this.props.data.allProducts.map(({ id, name, description, price }) => {
@@ -21,7 +43,7 @@ class ProductList extends Component{
                             </CardBlock>
                             <CardBlock>
                                 <CardText>{description}</CardText>
-                                <Button>Add To Cart</Button>
+                                {button}
                             </CardBlock>
                         </Card>
                     </Col>
@@ -30,12 +52,22 @@ class ProductList extends Component{
         }
         return(
             <Container>
+
                 <Row>
                     {products}
-                    <div>
-                        <AuthModal/>
-                    </div>
+
                 </Row>
+
+                <Modal isOpen={this.state.isOpen} toggle={this.closeModal}>
+                    <ModalHeader>Some Header</ModalHeader>
+                    <ModalBody>
+                        <Login/>
+
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="default" outline onClick={this.closeModal}>Close</Button>
+                    </ModalFooter>
+                </Modal>
             </Container>
 
         )
